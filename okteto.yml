@@ -1,0 +1,18 @@
+name: hello-world
+image: okteto/python:3
+command: [ "/usr/src/app/setup.sh" ]
+resources:
+  limits:
+    nvidia.com/gpu: 0
+environment:
+  - DEBUG_ENABLED=true
+volumes:
+  - /root/.cache/pip
+# externalVolumes:
+#   - pvc-name:subpath:/var/lib/mysql
+sync:
+  - .:/usr/src/app
+forward:
+  - 8080:8080
+reverse:
+  - 9000:9000
